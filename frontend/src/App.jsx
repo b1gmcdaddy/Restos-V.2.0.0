@@ -36,20 +36,28 @@ const App = () => {
     axios.get('http://localhost:5000/')
       .then((res) => {
         const data = res.data;
+  
+        // Separate the fetched data into "to go" and "done" arrays
         const togoRestos = data.filter((resto) => resto.status === 'togo');
         const doneRestos = data.filter((resto) => resto.status === 'done');
   
+        // Set "restoPlans" to "togoRestos" initially
         setRestoPlans(togoRestos);
+  
+        // Set "doneRestos" to "doneRestos" initially
         setDoneRestos(doneRestos);
+  
         setIsLoading(false);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [restoPlans]);
+  
 
   //adding Resto to the list
   const addResto = (e) => {
+    e.preventDefault();
 
     if (newResto.length > 0) {
       const dataToInsert = {
@@ -64,7 +72,7 @@ const App = () => {
   
           setRestoPlans((prevTasks) => [
             ...prevTasks,
-            { text: newResto, description: restoDescription },
+            { resto_name: newResto, resto_desc: restoDescription },
           ]);
           setNewResto('');
           setRestoDescription('');
@@ -78,10 +86,13 @@ const App = () => {
   //updating resto to DONE list
   const doneResto = (index) => {
     const taskToComplete = restoPlans[index];
-    
-    axios.put(`http://localhost:5000/updateStatus/${taskToComplete.id}`, { status: 'done' })
+    axios
+      .put(`http://localhost:5000/updateStatus/${taskToComplete.id}`, {
+        status: 'done',
+      })
       .then((res) => {
         if (res.data.message === 'Status updated successfully') {
+          taskToComplete.status = 'done';
           setRestoPlans((prevTasks) => prevTasks.filter((_, i) => i !== index));
           setDoneRestos((prevTasks) => [...prevTasks, taskToComplete]);
         }
@@ -90,6 +101,7 @@ const App = () => {
         console.error('Error updating status:', err);
       });
   };
+  
 
   //delete resto
   const deleteResto = (id) => {
