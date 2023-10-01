@@ -13,7 +13,7 @@ const DescriptionModal = ({ isOpen, onClose, description }) => {
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Task Description</ModalHeader>
+        <ModalHeader>Notes</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {description}

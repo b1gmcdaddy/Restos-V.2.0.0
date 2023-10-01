@@ -14,43 +14,43 @@ import {
   TabPanel,
   IconButton,
   ButtonGroup
-} from '@chakra-ui/react';
-import { CheckIcon, ChatIcon } from '@chakra-ui/icons';
-import DescriptionModal from './components/DescriptionModal';
+} from '@chakra-ui/react';                                      //chakraUI components
+import { CheckIcon, ChatIcon } from '@chakra-ui/icons';         //chakraUI icons
+import DescriptionModal from './components/DescriptionModal';   //modal component
 
 const App = () => {
-  const [newTask, setNewTask] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
-  const [incompleteTasks, setIncompleteTasks] = useState([]);
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTaskDescription, setSelectedTaskDescription] = useState('');
+  const [newResto, setNewResto] = useState('');                                     //useState for the input
+  const [restoDescription, setRestoDescription] = useState('');                     //useState for the desc input
+  const [restoPlans, setRestoPlans] = useState([]);                                 //array that holds the restos
+  const [doneRestos, setDoneRestos] = useState([]);                                 //array that holds the completed restos
+  const [isModalOpen, setIsModalOpen] = useState(false);                            //boolean whether modal is open or not
+  const [selectedDescription, setSelectedDescription] = useState('');               //stores desc and stores in modal
 
-  const addTask = (e) => {
+  const addResto = (e) => {
     e.preventDefault();
-
-    if (newTask.length > 0) {
-      setIncompleteTasks((prevTasks) => [
+    
+    if (newResto.length > 0) {
+      setRestoPlans((prevTasks) => [
         ...prevTasks,
-        { text: newTask, description: taskDescription }
+        { text: newResto, description: restoDescription }
       ]);
-      setNewTask('');
-      setTaskDescription('');
+      setNewResto('');
+      setRestoDescription('');
     }
   };
 
-  const completeTask = (index) => {
-    const taskToComplete = incompleteTasks[index];
-    setIncompleteTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
-    setCompletedTasks((prevTasks) => [...prevTasks, taskToComplete]);
+  const doneResto = (index) => {
+    const taskToComplete = restoPlans[index];
+    setRestoPlans((prevTasks) => prevTasks.filter((_, i) => i !== index));
+    setDoneRestos((prevTasks) => [...prevTasks, taskToComplete]);
   };
 
-  const openTaskDescriptionModal = (description) => {
-    setSelectedTaskDescription(description);
+  const openDescriptionModal = (description) => {
+    setSelectedDescription(description);
     setIsModalOpen(true);
   };
 
-  const closeTaskDescriptionModal = () => {
+  const closeDescriptionModal = () => {
     setIsModalOpen(false);
   };
 
@@ -59,55 +59,55 @@ const App = () => {
       <Flex w="100%" h="100vh">
         <Flex w="100%" flexDir="column" ml="20%" mt="5%" mr="20%" color="white">
           <Text fontWeight="700" fontSize={30}>
-            Tasks
+            Jolo and Ali's Foodtrips
           </Text>
-          <form onSubmit={addTask}>
+          <form onSubmit={addResto}>
             <Flex mt="2%">
               <Input
-                value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}
+                value={newResto}
+                onChange={(e) => setNewResto(e.target.value)}
                 variant="flushed"
-                placeholder="Add task"
+                placeholder="Add resto"
                 w="50%"
               />
               <Input
-                value={taskDescription}
-                onChange={(e) => setTaskDescription(e.target.value)}
+                value={restoDescription}
+                onChange={(e) => setRestoDescription(e.target.value)}
                 variant="flushed"
-                placeholder="Task description"
+                placeholder="resto description"
                 w="50%"
               />
-              <Button onClick={addTask} ml={5} bg="blue.400">
-                Add Task
+              <Button onClick={addResto} ml={5} bg="blue.400">
+                Add resto
               </Button>
             </Flex>
           </form>
           <Tabs mt="2%" w="100%">
             <TabList>
-              <Tab>Incomplete Tasks</Tab>
-              <Tab>Completed Tasks</Tab>
+              <Tab>Foodtrips</Tab>
+              <Tab>DONE</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
-                {incompleteTasks.map((task, index) => (
+                {restoPlans.map((resto, index) => (
                   <TaskItem
                     key={index}
-                    task={task}
+                    resto={resto}
                     index={index}
-                    completeTask={completeTask}
-                    openTaskDescriptionModal={openTaskDescriptionModal}
+                    doneResto={doneResto}
+                    openDescriptionModal={openDescriptionModal}
                   />
                 ))}
               </TabPanel>
               <TabPanel>
-                {completedTasks.map((task, index) => (
+                {doneRestos.map((resto, index) => (
                   <TaskItem
                     key={index}
-                    task={task}
+                    resto={resto}
                     index={index}
-                    completeTask={completeTask}
+                    doneResto={doneResto}
                     isCompleted={true}
-                    openTaskDescriptionModal={openTaskDescriptionModal}
+                    openDescriptionModal={openDescriptionModal}
                   />
                 ))}
               </TabPanel>
@@ -117,24 +117,24 @@ const App = () => {
       </Flex>
       <DescriptionModal
         isOpen={isModalOpen}
-        onClose={closeTaskDescriptionModal}
-        description={selectedTaskDescription}
+        onClose={closeDescriptionModal}
+        description={selectedDescription}
       />
     </>
   );
 };
 
-const TaskItem = ({ task, index, completeTask, isCompleted, openTaskDescriptionModal }) => {
+const TaskItem = ({ resto, index, doneResto, isCompleted, openDescriptionModal }) => {
   return (
     <Flex minWidth="max-content" alignItems="center" gap="2">
       <Box p="2">
-        <Heading size="md">{task.text}</Heading>
+        <Heading size="md">{resto.text}</Heading>
       </Box>
       <Spacer />
       {!isCompleted && (
         <ButtonGroup gap="2">
-          <IconButton icon={<ChatIcon />} onClick={() => openTaskDescriptionModal(task.description)} />
-          <IconButton onClick={() => completeTask(index)} icon={<CheckIcon />} />
+          <IconButton icon={<ChatIcon />} onClick={() => openDescriptionModal(resto.description)} />
+          <IconButton onClick={() => doneResto(index)} icon={<CheckIcon />} />
         </ButtonGroup>
       )}
     </Flex>
