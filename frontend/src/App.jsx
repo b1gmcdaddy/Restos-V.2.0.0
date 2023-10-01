@@ -13,11 +13,28 @@ import {
   TabPanels,
   TabPanel,
   IconButton,
-  ButtonGroup
+  ButtonGroup,
+  Stack,
 } from '@chakra-ui/react';                                                  
 import { CheckIcon, ChatIcon, DeleteIcon } from '@chakra-ui/icons';         
 import DescriptionModal from './components/DescriptionModal';              
-import axios from 'axios';                                                  
+import axios from 'axios';    
+import bg from './assets/bg.jpg';            
+import './App.css';
+
+//bg-image w styling
+const bgImageStyle = {
+  backgroundImage: `url(${bg})`, 
+  backgroundSize: 'cover', 
+  backgroundPosition: 'center', 
+  minHeight: '100vh',
+};
+
+const contentBoxStyle = {
+  backgroundColor: '#FFFAF0', 
+  padding: '20px', 
+  borderRadius: '10px', 
+};
 
 
 const App = () => {
@@ -36,17 +53,11 @@ const App = () => {
     axios.get('http://localhost:5000/')
       .then((res) => {
         const data = res.data;
-  
-        // Separate the fetched data into "to go" and "done" arrays
         const togoRestos = data.filter((resto) => resto.status === 'togo');
         const doneRestos = data.filter((resto) => resto.status === 'done');
-  
-        // Set "restoPlans" to "togoRestos" initially
+
         setRestoPlans(togoRestos);
-  
-        // Set "doneRestos" to "doneRestos" initially
         setDoneRestos(doneRestos);
-  
         setIsLoading(false);
       })
       .catch((err) => {
@@ -129,37 +140,40 @@ const App = () => {
   };
 
   return (
-    <>
-      <Flex w="100%" h="100vh">
-        <Flex w="100%" flexDir="column" ml="20%" mt="5%" mr="20%" color="white">
-          <Text fontWeight="700" fontSize={30}>
+    <div style={bgImageStyle}>
+    <Flex alignItems="center" justifyContent="center" h="100vh">
+      <Box style={contentBoxStyle} w={['100%', '50%']} p="20px" boxShadow="lg">
+        <Flex flexDir="column" color="black">
+          <Text fontWeight="700" fontSize={30} textAlign="center">
             Jolo and Ali's Foodtrips
           </Text>
           <form onSubmit={addResto}>
-            <Flex mt="2%">
-              <Input
-                value={newResto}
-                onChange={(e) => setNewResto(e.target.value)}
-                variant="flushed"
-                placeholder="Add resto"
-                w="50%"
-              />
-              <Input
-                value={restoDescription}
-                onChange={(e) => setRestoDescription(e.target.value)}
-                variant="flushed"
-                placeholder="Resto description"
-                w="50%"
-              />
-              <Button onClick={addResto} ml={5} bg="blue.400">
-                Add Resto
+          <Stack spacing={3}>
+            <Input placeholder='Enter restaurant name' size='md' 
+            className='custom-input'
+            borderBottomColor="gray.400" 
+            _placeholder={{ opacity: 0.4, color: 'inherit' }}
+            _hover={{ borderColor: 'red.700' }} 
+            value={newResto}
+            onChange={(e) => setNewResto(e.target.value)}
+            />
+            <Input placeholder='Enter description/notes' size='md' 
+            className='custom-input2' 
+            borderBottomColor="gray.400" 
+            _placeholder={{ opacity: 0.4, color: 'inherit' }}
+            _hover={{ borderColor: 'red.700' }} 
+            value={restoDescription}
+            onChange={(e) => setRestoDescription(e.target.value)}
+            />
+            <Button onClick={addResto} ml={5} bg="yellow.500" _hover={{ bg: 'yellow.400' }} mt={2}>
+                ADD RESTO
               </Button>
-            </Flex>
+          </Stack>
           </form>
           <Tabs mt="2%" w="100%">
             <TabList>
-              <Tab>Foodtrips</Tab>
-              <Tab>DONE</Tab>
+              <Tab _selected={{ color: 'white', bg: 'yellow.500' }}>Foodtrips</Tab>
+              <Tab _selected={{ color: 'white', bg: 'yellow.500' }}>DONE</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -193,20 +207,20 @@ const App = () => {
             </TabPanels>
           </Tabs>
         </Flex>
+        </Box>
       </Flex>
       <DescriptionModal
         isOpen={isModalOpen}
         onClose={closeDescriptionModal}
         description={selectedDescription}
       />
-    </>
+    </div>
   );
 };
 
   //content of TabPanel
   const RestoFoodTrip = ({ resto, index, doneResto, deleteResto, isCompleted, openDescriptionModal }) => {
     const handleDelete = () => {
-      // Call the deleteResto function with the restaurant's ID
       deleteResto(resto.id);
     };
   
@@ -218,12 +232,12 @@ const App = () => {
         <Spacer />
         {!isCompleted && (
           <ButtonGroup gap="2">
-            <IconButton icon={<ChatIcon />} onClick={() => openDescriptionModal(resto.resto_desc)} />
-            <IconButton onClick={() => doneResto(index)} icon={<CheckIcon />} />
+            <IconButton className='iconbuttons1' icon={<ChatIcon />} onClick={() => openDescriptionModal(resto.resto_desc)} color="yellow.600" border='1px solid' borderColor='black' />
+            <IconButton className='iconbuttons2' icon={<CheckIcon />} onClick={() => doneResto(index)}  color="green.400" border='1px solid' borderColor='black'/>
           </ButtonGroup>
         )}
         {isCompleted && (
-          <IconButton onClick={handleDelete} icon={<DeleteIcon />} color="red.500" />
+          <IconButton onClick={handleDelete} icon={<DeleteIcon />} color="red.500"  />
         )}
       </Flex>
     );

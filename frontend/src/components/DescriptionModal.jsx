@@ -10,7 +10,7 @@ import {
 
 const DescriptionModal = ({ isOpen, onClose, description }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size="lg"  >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Notes</ModalHeader>
