@@ -19,13 +19,15 @@ import { CheckIcon, ChatIcon } from '@chakra-ui/icons';         //chakraUI icons
 import DescriptionModal from './components/DescriptionModal';   //modal component
 
 const App = () => {
-  const [newResto, setNewResto] = useState('');                                     //useState for the input
-  const [restoDescription, setRestoDescription] = useState('');                     //useState for the desc input
-  const [restoPlans, setRestoPlans] = useState([]);                                 //array that holds the restos
-  const [doneRestos, setDoneRestos] = useState([]);                                 //array that holds the completed restos
-  const [isModalOpen, setIsModalOpen] = useState(false);                            //boolean whether modal is open or not
-  const [selectedDescription, setSelectedDescription] = useState('');               //stores desc and stores in modal
+  //useStates
+  const [newResto, setNewResto] = useState('');                                    
+  const [restoDescription, setRestoDescription] = useState('');                     
+  const [restoPlans, setRestoPlans] = useState([]);                                 
+  const [doneRestos, setDoneRestos] = useState([]);                                
+  const [isModalOpen, setIsModalOpen] = useState(false);                            
+  const [selectedDescription, setSelectedDescription] = useState('');               
 
+  //adding Resto to the list
   const addResto = (e) => {
     e.preventDefault();
     
@@ -38,18 +40,20 @@ const App = () => {
       setRestoDescription('');
     }
   };
-
+  //updating resto to DONE list
   const doneResto = (index) => {
     const taskToComplete = restoPlans[index];
     setRestoPlans((prevTasks) => prevTasks.filter((_, i) => i !== index));
     setDoneRestos((prevTasks) => [...prevTasks, taskToComplete]);
   };
 
+  //opening modal
   const openDescriptionModal = (description) => {
     setSelectedDescription(description);
     setIsModalOpen(true);
   };
 
+  //closing modal
   const closeDescriptionModal = () => {
     setIsModalOpen(false);
   };
@@ -74,7 +78,7 @@ const App = () => {
                 value={restoDescription}
                 onChange={(e) => setRestoDescription(e.target.value)}
                 variant="flushed"
-                placeholder="resto description"
+                placeholder="Resto description"
                 w="50%"
               />
               <Button onClick={addResto} ml={5} bg="blue.400">
@@ -90,7 +94,7 @@ const App = () => {
             <TabPanels>
               <TabPanel>
                 {restoPlans.map((resto, index) => (
-                  <TaskItem
+                  <RestoFoodTrip
                     key={index}
                     resto={resto}
                     index={index}
@@ -101,7 +105,7 @@ const App = () => {
               </TabPanel>
               <TabPanel>
                 {doneRestos.map((resto, index) => (
-                  <TaskItem
+                  <RestoFoodTrip
                     key={index}
                     resto={resto}
                     index={index}
@@ -124,7 +128,8 @@ const App = () => {
   );
 };
 
-const TaskItem = ({ resto, index, doneResto, isCompleted, openDescriptionModal }) => {
+  //content of TabPanel
+const RestoFoodTrip = ({ resto, index, doneResto, isCompleted, openDescriptionModal }) => {
   return (
     <Flex minWidth="max-content" alignItems="center" gap="2">
       <Box p="2">
