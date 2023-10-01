@@ -82,7 +82,7 @@ const App = () => {
                 w="50%"
               />
               <Button onClick={addResto} ml={5} bg="blue.400">
-                Add resto
+                Add Resto
               </Button>
             </Flex>
           </form>
