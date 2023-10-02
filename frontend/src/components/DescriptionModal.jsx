@@ -15,7 +15,7 @@ const DescriptionModal = ({ isOpen, onClose, description }) => {
       <ModalContent>
         <ModalHeader>Notes</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody p={6}>
           {description}
         </ModalBody>
       </ModalContent>

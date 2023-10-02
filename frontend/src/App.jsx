@@ -238,15 +238,15 @@ const App = () => {
         <Box p="2">
           <Heading size="md">{resto.resto_name}</Heading>
         </Box>
-        <Spacer />
+        <Spacer/>
         {!isCompleted && (
           <ButtonGroup gap="2">
-            <IconButton className='iconbuttons1' icon={<ChatIcon />} onClick={() => openDescriptionModal(resto.resto_desc)} color="yellow.600" border='1px solid' borderColor='black' />
-            <IconButton className='iconbuttons2' icon={<CheckIcon />} onClick={() => doneResto(index)}  color="green.400" border='1px solid' borderColor='black'/>
+            <IconButton className='iconbuttons1' icon={<ChatIcon />} onClick={() => openDescriptionModal(resto.resto_desc)} color="black.600" border='0.5px solid' borderColor='gray' mb="10px"/>
+            <IconButton className='iconbuttons2' icon={<CheckIcon />} onClick={() => doneResto(index)}  color="green.400" border='0.5px solid' borderColor='gray'/>
           </ButtonGroup>
         )}
         {isCompleted && (
-          <IconButton onClick={handleDelete} icon={<DeleteIcon />} color="red.500"  />
+          <IconButton onClick={handleDelete} icon={<DeleteIcon />} color="red.700"  />
         )}
       </Flex>
     );

@@ -12,13 +12,12 @@
 }
 
 .iconbuttons1:hover {
-  color: rgb(154, 120, 32);
-  border-color: rgb(154, 120, 32);
+  opacity: 55%;
 }
 
 .iconbuttons2:hover {
-  color: rgb(156, 12, 12);
-  border-color: rgb(212, 20, 20);
+  color: green;
+  border-color: green;
 }
 
 #header-title {
