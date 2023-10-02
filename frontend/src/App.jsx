@@ -19,12 +19,12 @@ import {
 import { CheckIcon, ChatIcon, DeleteIcon } from '@chakra-ui/icons';         
 import DescriptionModal from './components/DescriptionModal';              
 import axios from 'axios';    
-import bg from './assets/bg.jpg';            
+import bg2 from './assets/bg2.jpg';            
 import './App.css';
 
 //bg-image w styling
 const bgImageStyle = {
-  backgroundImage: `url(${bg})`, 
+  backgroundImage: `url(${bg2})`, 
   backgroundSize: 'cover', 
   backgroundPosition: 'center', 
   minHeight: '100vh',
@@ -153,7 +153,7 @@ const App = () => {
             className='custom-input'
             borderBottomColor="gray.400" 
             _placeholder={{ opacity: 0.4, color: 'inherit' }}
-            _hover={{ borderColor: 'red.700' }} 
+            _hover={{ borderColor: 'black.700' }} 
             value={newResto}
             onChange={(e) => setNewResto(e.target.value)}
             />
@@ -161,19 +161,19 @@ const App = () => {
             className='custom-input2' 
             borderBottomColor="gray.400" 
             _placeholder={{ opacity: 0.4, color: 'inherit' }}
-            _hover={{ borderColor: 'red.700' }} 
+            _hover={{ borderColor: 'black.700' }} 
             value={restoDescription}
             onChange={(e) => setRestoDescription(e.target.value)}
             />
-            <Button onClick={addResto} ml={5} bg="yellow.500" _hover={{ bg: 'yellow.400' }} mt={2}>
+            <Button onClick={addResto} ml={5} bg="blue.700" _hover={{ bg: 'blue.600' }} mt={2}>
                 ADD RESTO
               </Button>
           </Stack>
           </form>
           <Tabs mt="2%" w="100%">
             <TabList>
-              <Tab _selected={{ color: 'white', bg: 'yellow.500' }}>Foodtrips</Tab>
-              <Tab _selected={{ color: 'white', bg: 'yellow.500' }}>DONE</Tab>
+              <Tab variant='unstyled'>Foodtrips</Tab>
+              <Tab variant='unstyled'>DONE</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>

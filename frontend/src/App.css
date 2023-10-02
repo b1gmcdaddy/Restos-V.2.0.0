@@ -20,3 +20,8 @@
   color: rgb(156, 12, 12);
   border-color: rgb(212, 20, 20);
 }
+
+.active-tab {
+  color: gold; 
+
+}
