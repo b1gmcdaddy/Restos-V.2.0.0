@@ -36,6 +36,12 @@ const contentBoxStyle = {
   borderRadius: '10px', 
 };
 
+const headerBoxStyle = {
+  padding: '30px', 
+  borderRadius: '10px',
+  border: '2px solid',
+};
+
 
 const App = () => {
 
@@ -141,12 +147,14 @@ const App = () => {
 
   return (
     <div style={bgImageStyle}>
+      
     <Flex alignItems="center" justifyContent="center" h="100vh">
-      <Box style={contentBoxStyle} w={['100%', '50%']} p="20px" boxShadow="lg">
+      <Stack w={['100%', '50%']} alignItems="center" justifyContent="center">
+      <Box style={headerBoxStyle} w={['100%', '80%']} p="20px" boxShadow="lg" bgColor='blue.700'>
+        <h1 id='header-title'>FoodTrips</h1>
+      </Box>
+      <Box style={contentBoxStyle} w={['100%', '80%']} p="20px" boxShadow="lg">
         <Flex flexDir="column" color="black">
-          <Text fontWeight="700" fontSize={30} textAlign="center">
-            Jolo and Ali's Foodtrips
-          </Text>
           <form onSubmit={addResto}>
           <Stack spacing={3}>
             <Input placeholder='Enter restaurant name' size='md' 
@@ -208,6 +216,7 @@ const App = () => {
           </Tabs>
         </Flex>
         </Box>
+        </Stack>
       </Flex>
       <DescriptionModal
         isOpen={isModalOpen}
