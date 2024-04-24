@@ -1,3 +1,3 @@
-# Restos V.2.0.0
+#Jolow's Restos
 
 (practice CRUD) notes app using react + express
