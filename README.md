@@ -1,3 +1,2 @@
 #Jolow's Restos
-
-(practice CRUD) notes app using react + express
+notes app using react + express
