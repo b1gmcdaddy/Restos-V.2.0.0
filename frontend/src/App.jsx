@@ -56,7 +56,7 @@ const App = () => {
   
   //useEffect for backend
   useEffect(() => {
-    axios.get('http://localhost:5000/')
+    axios.get('http://localhost:5000/home')
       .then((res) => {
         const data = res.data;
         const togoRestos = data.filter((resto) => resto.status === 'togo');

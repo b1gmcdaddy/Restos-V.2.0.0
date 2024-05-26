@@ -14,7 +14,7 @@ const db = mysql.createConnection({
     database: "foodtrips"
 })
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
   const sql = 'SELECT * FROM restos';
   db.query(sql, (err, rows) => {
     if (err) {
