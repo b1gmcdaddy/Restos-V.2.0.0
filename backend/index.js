@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-    host: "ec2-52-8-112-233.us-west-1.compute.amazonaws.com",
+    host: "sql12.freemysqlhosting.net",
     user: "sql12709419",
     password: "Jv7LMxSYDl",
     database: "sql12709419",
