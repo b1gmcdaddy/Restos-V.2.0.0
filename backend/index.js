@@ -8,10 +8,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "foodtrips"
+    host: "ec2-52-8-112-233.us-west-1.compute.amazonaws.com",
+    user: "sql12709419",
+    password: "Jv7LMxSYDl",
+    database: "sql12709419",
+    port: 3306
 })
 
 app.get('/home', (req, res) => {
