@@ -104,7 +104,7 @@ const App = () => {
   const doneResto = (index) => {
     const taskToComplete = restoPlans[index];
     axios
-      .put(`https://jolo-restosnew.onrender.com/${taskToComplete.id}`, {
+      .put(`https://jolo-restosnew.onrender.com/updateStatus/${taskToComplete.id}`, {
         status: 'done',
       })
       .then((res) => {
