@@ -56,7 +56,7 @@ const App = () => {
   
   //useEffect for backend
   useEffect(() => {
-    axios.get('http://localhost:5000/home')
+    axios.get('https://jolo-restosnew.onrender.com/home')
       .then((res) => {
         const data = res.data;
         const togoRestos = data.filter((resto) => resto.status === 'togo');
@@ -83,7 +83,7 @@ const App = () => {
         status: 'togo', 
       };
   
-      axios.post('http://localhost:5000/addResto', dataToInsert)
+      axios.post('https://jolo-restosnew.onrender.com/addResto', dataToInsert)
         .then((res) => {
           console.log('Data inserted successfully:', res.data);
   
@@ -104,7 +104,7 @@ const App = () => {
   const doneResto = (index) => {
     const taskToComplete = restoPlans[index];
     axios
-      .put(`http://localhost:5000/updateStatus/${taskToComplete.id}`, {
+      .put(`https://jolo-restosnew.onrender.com/${taskToComplete.id}`, {
         status: 'done',
       })
       .then((res) => {
@@ -122,7 +122,7 @@ const App = () => {
 
   //delete resto
   const deleteResto = (id) => {
-    axios.delete(`http://localhost:5000/deleteResto/${id}`)
+    axios.delete(`https://jolo-restosnew.onrender.com/deleteResto/${id}`)
       .then((res) => {
         if (res.data.message === 'Restaurant deleted successfully') {
           setDoneRestos((prevTasks) => prevTasks.filter((resto) => resto.id !== id));
